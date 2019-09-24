@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+
+{% block mainpanel %}
+    <form action='{% url 'post_update' todo_id %}' method='post'>
+        
+        {% csrf_token %}
+        <input type='text' value='{{to_update.todo}}' name='todo' />
+        <input type='submit' value='Submit' name='update_submit' />
+
+    </form>
+{% endblock %}

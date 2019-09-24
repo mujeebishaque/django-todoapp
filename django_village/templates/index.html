@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Todo Application</title>
+</head>
+<body>
+	
+	<section>
+		<div style="background-color: black; padding: 20px 40px;">
+			<h3 style="text-align: center;">
+				Todo Application
+			</h3>
+		</div>
+	</section>
+	{% block mainpanel %}
+	<section>
+		<center>
+			
+			<dt><h2>Todos</h2></dt><br>
+			
+			{% for todo in todos %}
+				<dd>{{ todo.todo }} |  
+				{% if todo.is_complete %} 
+					<pre> Completed </pre>
+				{% else %} 
+					<pre> Not Completed</pre> 
+				{% endif %} </dd>
+				
+				<a href="{% url 'mark_complete' todo.id %}">Mark As Complete</a>
+				<a href="{% url 'delete' todo.id %}">Delete Todo</a>
+				<a href="{% url 'update' todo.id %}">Update Todo</a>
+			{% endfor %}
+			
+		</center>
+	</section>
+	<br /><br />
+	
+	<section>
+		<center>
+			<form action='' method='POST'>
+				{% csrf_token %}
+				<label style="text-align: left;"><strong>Enter Your Todo : </strong></label><br>
+				<input type="text" value="" name="todo" /><br><br>
+				<input type="submit" value="submit" name="submit" />
+
+			</form>
+		</center>
+	</section>
+	{% endblock %}
+
+</body>
+</html>
